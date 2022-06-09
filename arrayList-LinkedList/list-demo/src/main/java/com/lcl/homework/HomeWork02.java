@@ -1,9 +1,6 @@
 package com.lcl.homework;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HomeWork02 {
 
@@ -68,6 +65,77 @@ public class HomeWork02 {
         }
         return minLen;
 
+    }
+
+
+    public static void main(String[] args) {
+        HomeWork02 homeWork02 = new HomeWork02();
+        homeWork02.permute(new int[]{1,2,3});
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<Boolean> flagList = new ArrayList();
+        int len = nums.length;
+        for(int i=0;i<len;i++){
+            flagList.add(false);
+        }
+        List<List<Integer>> ans = new ArrayList();
+        List<Integer> list = new ArrayList();
+        permuteNew(nums, 0, len, list, flagList, ans);
+        return ans;
+    }
+
+    private void permuteNew(int[] nums, int i, int length, List<Integer> list, List<Boolean> flagList, List<List<Integer>> ans){
+        if(i == length || list.size() == length){
+            List<Integer> temp = new ArrayList(list);
+            ans.add(temp);
+            return;
+        }
+        for(int index = 0; index < length; index++){
+            if(!flagList.get(index)){
+                list.add(nums[index]);
+                flagList.set(index, true);
+                permuteNew(nums, i+1,length,list,flagList,ans);
+                list.remove(list.size()-1);
+                flagList.set(index, false);
+            }
+        }
+    }
+
+
+    /**
+     * 全排列2
+     */
+    class Solution {
+        int len;
+        boolean[] flagArr;
+        public List<List<Integer>> permuteUnique(int[] nums) {
+            List<List<Integer>> ans = new ArrayList();
+            List<Integer> list = new ArrayList();
+            len = nums.length;
+            flagArr = new boolean[len];
+            Arrays.sort(nums);
+            permuteUnique(ans, list, nums, 0);
+            return ans;
+        }
+
+        public void permuteUnique(List<List<Integer>> ans, List<Integer> list, int[] nums, int index){
+            if(list.size() == len){
+                List<Integer> subList = new ArrayList(list);
+                ans.add(subList);
+                return;
+            }
+            for(int i=0;i<len;i++){
+                if(flagArr[i] || (i > 0 && nums[i] == nums[i-1]) && flagArr[i-1]){
+                    continue;
+                }
+                list.add(nums[i]);
+                flagArr[i] = true;
+                permuteUnique(ans, list, nums, index+1);
+                list.remove(list.size()-1);
+                flagArr[i] = false;
+            }
+        }
     }
 
 }
