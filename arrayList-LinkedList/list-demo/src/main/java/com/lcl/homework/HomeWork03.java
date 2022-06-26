@@ -114,5 +114,6 @@ public class HomeWork03 {
         visited[u] = 2;
         // 将节点入栈
         result[index--] = u;
+
     }
 }
