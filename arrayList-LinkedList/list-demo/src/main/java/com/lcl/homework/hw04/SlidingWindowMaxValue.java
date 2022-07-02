@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 public class SlidingWindowMaxValue {
     public int[] maxSlidingWindow(int[] nums, int k) {
         // 0：下标 1：数值
-        PriorityQueue<int[]> q = new PriorityQueue<>(nums.length, (a, b) -> b[1]-a[1]);
+        PriorityQueue<int[]> q = new PriorityQueue<int[]>(nums.length, (a, b) -> b[1]-a[1]);
         int[] ans = new int[nums.length-k+1];
         for(int i=0;i<nums.length;i++){
             q.add(new int[]{i, nums[i]});

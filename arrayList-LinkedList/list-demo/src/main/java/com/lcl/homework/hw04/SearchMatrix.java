@@ -23,4 +23,8 @@ public class SearchMatrix {
         }
         return false;
     }
+
+    public static void main(String[] args) {
+        System.out.printf("" + Math.random());
+    }
 }
